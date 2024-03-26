@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 6px;
+            font-family: "Cairo", sans-serif;
+            transition:all 0.3s linear;
+        }
+        .container{
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        background-color:#fff;
+        }
+      .dStudent{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        background-color: rgb(250, 250, 252);
+        max-width: 80%;
+        padding: 30px ;
+        margin: auto;
+        z-index: 999;
+      }
+      .dStudent::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:linear-gradient(25deg,rgba(0, 0, 255, 0.685) 30%, rgba(0, 153, 255, 0.685) 50%);
+        z-index: -1;
+        border-radius: 8px;
+      }
+      .dStudent input:not(:last-child){
+        border: 1px solid rgb(184, 181, 181);
+        outline: none;
+        padding-left: 10px;
+      }
+      .dStudent input{
+        font-size: 1.2rem;
+        padding: 5px 10px;
+        border-radius: 8px;
+      }
+      .dStudent > input:last-child{
+        font-size: 1.3rem;
+        font-weight: bold;
+        background: linear-gradient(25deg,var(--m) 50%,var(--i) 50%);
+        color: white;
+        padding: 5px 20px;
+        border: 2px ridge;
+      }
+      .search span input{
+        margin: 5px; 
+      }
+      thead {
+        border: 1px solid #fff;
+        border-collapse: collapse;
+        background-color: rgb(12, 243, 243);
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      thead td:first-child{
+        padding: 0 10px;
+      }
+      td{
+        padding-left: 5px;
+        text-align: center
+      }
+      .del,.up{
+        cursor: pointer;
+        background: linear-gradient(25deg,var(--m) 50%,var(--i) 50%);
+        font-size: 1rem;
+        padding: 3px;
+        border-radius: 8px;
+        font-weight: bold;
+        color: white;
+        width: 80%;
+      }
+      .search {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        font-size: 1.5rem;
+      }
+      .search span{
+        font-size: 1.2rem;
+      }
+      .tbody td:first-child{
+        background-color: rgb(12, 243, 243);
+      }
+      .tbody td{
+        font-size: 1.2em;
+        background-color: rgba(14, 38, 253, 0.253);
+        color: #000;
+        font-weight: bold;
+        padding: 10px 5px;
+      }
+      .dStudent div:not(:first-child){
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+      .lSelect{
+        width: 50%;
+        font-size: 1.1rem;
+      }
+      select{
+        width: 50%;
+      }
+      select option{
+        padding: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+      hr{
+        width: 100%;
+      }
+      input:hover,input:focus{
+        transform: scale(1.1);
+      }
+      tbody tr:hover{
+        transform: scaleY(1.1);
+        background-color: rgb(111, 111, 248);
+      }
+      .btn{
+        width: 30%;
+        margin: auto;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(25deg,var(--m) 50%,var(--i) 50%);
+        padding: 5px;
+      }
+      label[for='name']{
+        color: rgb(216, 17, 17);
+        margin-top: -10px;
+        text-align: right;
+        width: 70%;
+        font-size: 1rem;
+      }
+      input[type='submit']:hover,.btn:hover,.up:hover,.del:hover{
+        transform: scale(1.1);
+        background: linear-gradient(-25deg,var(--m) 50%,var(--i) 50%);
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="dStudent">
+      <div class="search">
+        <label for="">البحث ب</label>
+        <span onclick="addBlockSearch(this.id);textSearch.value = ''" id="1"  ><label for="sName">الاسم<input name="inputSearch" type="radio" id="sName"></label></span>
+        <span onclick="addBlockSearch(this.id)" id="2" ><label for="sSubject">المادة<input name="inputSearch" type="radio" id="sSubject"></label></span>
+        <span onclick="addBlockSearch(this.id)" id="3"  ><label for="sYear">السنة الدراسية<input name="inputSearch" type="radio" id="sYear"></label></span>
+      </div>
+     <div id="conSearch"> </div>
+        <input onkeydown="testData()" type="text" id="name" class="name" required placeholder="الاسم" autofocus>
+        <label for="name">ادخل الاسم رباعي *</label>
+        <input type="email" class="email" required placeholder="الايميل">
+        <input type="number" class="phone" required placeholder="الهاتف" maxlength="11">
+        <input type="number" class="fPhone" required placeholder="هاتف ولي الامر">
+        <div>
+        <label class="lSelect" for="year">حدد السنة الدراسية</label>
+        <select name="year" id="year">
+          <option value="الاولي">الاولي</option><hr>
+          <option value="الثانية">الثانية</option><hr>
+          <option value="الثالثة">الثالثة</option>
+        </select>
+        </div>
+        <div>
+        <label class="lSelect" for="subject">حدد المادة</label>
+        <select name="subject" id="subject">
+          <option value="جيولوجيا"> جيولوجيا</option><hr>
+          <option value="أحياء">أحياء</option><hr>
+          <option value="ج&أ">جيولوجيا و أحياء</option>
+        </select>
+        </div>
+        <input type="submit" style="--i:#f00;--m:#ee9c9c;" value="إنشاء" class="add">
+      </div>
+      <table>
+        <button class="btn" style="--i:#0f0;--m:#a9df9e;">طباعة</button>
+        <thead>
+          <td>م</td>
+          <td>الاسم</td>
+          <td>الايميل</td>
+          <td>الهاتف</td>
+          <td>هاتف ولي الامر</td>
+          <td>السنة</td>
+          <td>المادة</td>
+          <td>تحديث</td>
+          <td>حذف</td>
+        </thead>
+        <tbody class="tbody"></tbody>
+      </table>
+  </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
